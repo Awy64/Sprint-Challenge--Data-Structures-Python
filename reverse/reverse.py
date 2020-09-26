@@ -1,3 +1,4 @@
+from stack import Stack
 class Node:
     def __init__(self, value=None, next_node=None):
         self.value = value
@@ -39,4 +40,20 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        pass
+        if self.head == None:
+            return
+        stack = Stack()
+        stack.push(self.head)
+        current = self.head
+        current = current.get_next()
+        while current:
+            stack.push(current)
+            current = current.get_next()
+        cur = stack.pop()
+        self.head = cur
+        while stack.size != 0:
+            cur.set_next(stack.pop())
+            cur = cur.next_node
+        if stack.size == 0 and cur.next_node:
+            cur.next_node = None
+
